@@ -1,5 +1,6 @@
 """Story maker using trigrams with existing txt files."""
 import random
+import textwrap
 
 
 def main(file_path, num_of_words):
@@ -16,7 +17,8 @@ def main(file_path, num_of_words):
             story_list.append(random.choice(word_dict[key_word]))
         except KeyError:
             break
-    print(' '.join(story_list) + '.\n\n\t\t\t~FIN')
+    new_book = ' '.join(story_list)
+    print(textwrap.fill(new_book, 70), end='.\n\n\t\t\t~FIN\n\n')
 
 
 def text_loader(text_file):

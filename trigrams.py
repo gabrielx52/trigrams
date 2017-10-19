@@ -3,7 +3,7 @@ import random
 
 
 def main(file_path, num_of_words):
-    """."""
+    """Story making function."""
     text_loaded = text_loader(file_path)
     stripped_text = text_stripper(text_loaded)
     word_list = list_maker(stripped_text)
@@ -12,11 +12,11 @@ def main(file_path, num_of_words):
     story_list = starting_key.split(' ')
     for i in range(num_of_words):
         try:
-            key_word = " ".join([story_list][i], [story_list][i + 1])
-            print(key_word)
-        #     story_list.append(word_dict[key_word])
-        except IndexError:
+            key_word = " ".join([story_list[i], story_list[i + 1]])
+            story_list.append(random.choice(word_dict[key_word]))
+        except KeyError:
             break
+    print(' '.join(story_list) + '.\n\n\t\t\t~FIN')
 
 
 def text_loader(text_file):
@@ -59,3 +59,8 @@ def random_dictionary_key(dictionary):
     """Get random key from a dictionary."""
     random_key = random.choice(list(dictionary.keys()))
     return random_key
+
+
+if __name__ == "__main__":
+    import sys
+    main(sys.argv[1], int(sys.argv[2]))

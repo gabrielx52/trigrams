@@ -19,3 +19,14 @@ def text_stripper(text_data):
     stripped_text = ''.join([char for char in no_new_lines
                              if char.isalpha() or char == ' '])
     return stripped_text
+
+
+def list_maker(stripped_text):
+    """Convert text data into list of words in same order."""
+    word_list = [word for word in stripped_text.split(' ') if word.isalpha()]
+    return word_list
+
+
+def dict_maker(word_list):
+    """Make dict with trigram key value pairs."""
+    

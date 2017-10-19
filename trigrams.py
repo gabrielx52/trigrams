@@ -1,10 +1,22 @@
 """Story maker using trigrams with existing txt files."""
+import random
 
 
-def main(file):
+def main(file_path, num_of_words):
     """."""
-    dict_maker(list_maker(text_stripper(text_loader(file))))
-    pass
+    text_loaded = text_loader(file_path)
+    stripped_text = text_stripper(text_loaded)
+    word_list = list_maker(stripped_text)
+    word_dict = dict_maker(word_list)
+    starting_key = random_dictionary_key(word_dict)
+    story_list = starting_key.split(' ')
+    for i in range(num_of_words):
+        try:
+            key_word = " ".join([story_list][i], [story_list][i + 1])
+            print(key_word)
+        #     story_list.append(word_dict[key_word])
+        except IndexError:
+            break
 
 
 def text_loader(text_file):
@@ -33,7 +45,6 @@ def dict_maker(word_list):
     trigram_dict = {}
     for idx in range(len(word_list) - 1):
         key_word = ' '.join([word_list[idx], word_list[idx + 1]])
-        print(key_word)
         if key_word in trigram_dict:
             trigram_dict[key_word].append(word_list[idx + 2])
         else:
@@ -42,3 +53,9 @@ def dict_maker(word_list):
             except IndexError:
                 pass
     return trigram_dict
+
+
+def random_dictionary_key(dictionary):
+    """Get random key from a dictionary."""
+    random_key = random.choice(list(dictionary.keys()))
+    return random_key

@@ -11,7 +11,7 @@ def main(file_path, num_of_words):
     word_dict = dict_maker(word_list)
     starting_key = random_dictionary_key(word_dict)
     story_list = starting_key.split(' ')
-    for i in range(num_of_words):
+    for i in range(num_of_words - 2):
         try:
             key_word = " ".join([story_list[i], story_list[i + 1]])
             story_list.append(random.choice(word_dict[key_word]))
@@ -19,6 +19,7 @@ def main(file_path, num_of_words):
             break
     new_book = ' '.join(story_list)
     print(textwrap.fill(new_book, 70), end='.\n\n\t\t\t~FIN\n\n')
+    return textwrap.fill(new_book, 70)
 
 
 def text_loader(text_file):
@@ -63,6 +64,6 @@ def random_dictionary_key(dictionary):
     return random_key
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     import sys
     main(sys.argv[1], int(sys.argv[2]))

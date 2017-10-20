@@ -10,16 +10,9 @@ def main(file_path, num_of_words):
     word_list = list_maker(stripped_text)
     word_dict = dict_maker(word_list)
     starting_key = random_dictionary_key(word_dict)
-    story_list = starting_key.split(' ')
-    for i in range(num_of_words - 2):
-        try:
-            key_word = " ".join([story_list[i], story_list[i + 1]])
-            story_list.append(random.choice(word_dict[key_word]))
-        except KeyError:
-            break
-    new_book = ' '.join(story_list)
-    print(textwrap.fill(new_book, 70), end='.\n\n\t\t\t~FIN\n\n')
-    return textwrap.fill(new_book, 70)
+    new_story = trigram_story_maker(word_dict, starting_key, num_of_words)
+    print(textwrap.fill(new_story, 70), end='.\n\n\t\t\t~FIN\n\n')
+    return textwrap.fill(new_story, 70)
 
 
 def text_loader(text_file):
@@ -63,6 +56,18 @@ def random_dictionary_key(dictionary):
     random_key = random.choice(list(dictionary.keys()))
     return random_key
 
+
+def trigram_story_maker(word_dict, starting_key, number_of_words):
+    """Generate trigram story."""
+    story_list = starting_key.split(' ')
+    for i in range(number_of_words - 2):
+        key_word = " ".join([story_list[i], story_list[i + 1]])
+        if key_word in word_dict:
+            story_list.append(random.choice(word_dict[key_word]))
+        else:
+            break
+    new_book = ' '.join(story_list)
+    return new_book
 
 if __name__ == "__main__":  # pragma: no cover
     import sys

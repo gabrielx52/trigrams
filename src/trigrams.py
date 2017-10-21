@@ -1,4 +1,5 @@
 """Story maker using trigrams with existing txt files."""
+from __future__ import print_function
 import random
 import textwrap
 

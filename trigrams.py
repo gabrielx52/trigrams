@@ -1,4 +1,5 @@
 """Story maker using trigrams with existing txt files."""
+from __future__ import print_function
 import random
 import textwrap
 
@@ -11,7 +12,6 @@ def main(file_path, num_of_words):
     word_dict = dict_maker(word_list)
     starting_key = random_dictionary_key(word_dict)
     new_story = trigram_story_maker(word_dict, starting_key, num_of_words)
-    print(textwrap.fill(new_story, 70), end='.\n\n\t\t\t~FIN\n\n')
     return textwrap.fill(new_story, 70)
 
 
@@ -71,4 +71,4 @@ def trigram_story_maker(word_dict, starting_key, number_of_words):
 
 if __name__ == "__main__":  # pragma: no cover
     import sys
-    main(sys.argv[1], int(sys.argv[2]))
+    print(main(sys.argv[1], int(sys.argv[2])), end='.\n\n\t\t\t~FIN\n\n')
